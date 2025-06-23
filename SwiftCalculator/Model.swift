@@ -20,8 +20,8 @@ struct Number {
 		if exponent == "inf" { return "Error"}
 		return (
 			(signed ? "-" : "") +
-			(exponent.contains("e") ? exponent : String(Int(exponent)?.formattedWithSeparator ?? "0")) +
-			(floating ? "." + significand : "")
+			(exponent.contains("e") ? exponent : String(Int(exponent) ?? 0)) +
+			(floating ? "," + significand : "")
 		)
 	}
 	
@@ -266,15 +266,15 @@ private struct Instruction {
 	}
 }
 
-extension Formatter {
-    static let withSeparator: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-		formatter.groupingSeparator = ","
-        return formatter
-    }()
-}
-
-extension Numeric {
-    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
-}
+//extension Formatter {
+//    static let withSeparator: NumberFormatter = {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//		formatter.groupingSeparator = ","
+//        return formatter
+//    }()
+//}
+//
+//extension Numeric {
+//    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
+//}
