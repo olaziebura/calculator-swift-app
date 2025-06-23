@@ -6,6 +6,11 @@ struct NumberPad: View {
     var body: some View {
 		VStack {
 			HStack {
+				Spacer()
+				SquareRootButton(input: $input)
+			}
+			.padding(4)
+			HStack {
 				ClearButton(input: $input)
 				ChangeSignButton(input: $input)
 				PercentButton(input: $input)

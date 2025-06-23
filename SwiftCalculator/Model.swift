@@ -1,5 +1,6 @@
 import SwiftUI
 
+// przechowuje i przetwarza aktualnie wpisaną liczbę
 struct Number {
 	private var exponent: String = ""
 	private var floating: Bool = false
@@ -20,8 +21,8 @@ struct Number {
 		if exponent == "inf" { return "Error"}
 		return (
 			(signed ? "-" : "") +
-			(exponent.contains("e") ? exponent : String(Int(exponent)?.formattedWithSeparator ?? "0")) +
-			(floating ? "." + significand : "")
+			(exponent.contains("e") ? exponent : String(Int(exponent) ?? 0)) +
+			(floating ? "," + significand : "")
 		)
 	}
 	
@@ -82,6 +83,7 @@ struct Number {
 	}
 }
 
+// obsługuje działania matematyczne
 struct Input {
 	private var onDisplay: Number = .init()
 	private var orderForInstr: [Instruction] = []
@@ -221,6 +223,17 @@ struct Input {
 		}
 	}
 	
+	// Obliczanie pierwiastka kwadratowego
+	mutating func squareRootButtonPressed() -> Void {
+		let value = onDisplay.convertNumberToDouble()
+		if value < 0 {
+			onDisplay.setNumberToError()
+		} else {
+			onDisplay.setNumberFromDouble(double: sqrt(value))
+		}
+		updateSelectedOperation(operation: "√")
+	}
+	
 	mutating func equalSignButtonPressed() -> Void {
 		if orderForInstr.count == 0 {
 			if selectedOperation == "" || selectedOperation == "%" { return }
@@ -266,15 +279,15 @@ private struct Instruction {
 	}
 }
 
-extension Formatter {
-    static let withSeparator: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-		formatter.groupingSeparator = ","
-        return formatter
-    }()
-}
-
-extension Numeric {
-    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
-}
+//extension Formatter {
+//    static let withSeparator: NumberFormatter = {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//		formatter.groupingSeparator = ","
+//        return formatter
+//    }()
+//}
+//
+//extension Numeric {
+//    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
+//}

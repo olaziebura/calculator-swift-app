@@ -44,4 +44,20 @@ struct PercentButton: View {
 		}
 		.modifier(CalculatorButtonViewModifier())
     }
+	
+}
+
+// Przycisk pierwiastka kwadratowego
+struct SquareRootButton: View{
+	@Binding var input: Input
+	var body: some View{
+		Button(action:{
+			self.input.squareRootButtonPressed()
+		}){
+			Text("√")
+				.font(.title)
+				.modifier(SpecialButtonTextModifier())
+		}
+		.modifier(CalculatorButtonViewModifier())
+	}
 }

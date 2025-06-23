@@ -1,3 +1,5 @@
+// Główna zawartość aplikacji, pokazuje wyświetlacz i przyciski
+
 import SwiftUI
 
 struct ContentView: View {

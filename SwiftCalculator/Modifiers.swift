@@ -48,6 +48,7 @@ struct OperationButtonTextModifier: ViewModifier {
 			.frame(width: 72, height: 72)
 			.font(.largeTitle)
 			.cornerRadius(100)
+			//.background(Color(.systemPink))
 	}
 }
 
